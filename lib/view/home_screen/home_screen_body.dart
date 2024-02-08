@@ -23,7 +23,7 @@ class HomeScreenBody extends StatelessWidget {
               children: [
                 const CoustomAppBar(),
                 const SizedBox(
-                  height: 20,
+                  height: 5,
                 ),
                 CoustomTextFilled(
                   hintText: "Try Search Here",

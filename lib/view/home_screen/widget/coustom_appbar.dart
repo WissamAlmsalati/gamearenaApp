@@ -9,35 +9,31 @@ class CoustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height*0.08,
-      child:Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+      height: MediaQuery.of(context).size.height * 0.08,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-      image: DecorationImage(
-          image: AssetImage(Images.appLogo),
-          fit: BoxFit.contain,
-
-      ),
-    ),
-            width: 50,
-            height: 50,
+            child: Image.asset(
+              Images.textLogo,
+              width: MediaQuery.of(context).size.width * 0.58,
+            ),
           ),
-          const Spacer(),
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications), color: Colors.black),
+          Spacer(),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.notifications),
+              color: Colors.black),
           Builder(
             builder: (context) => IconButton(
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              icon: Icon(Icons.menu),
-              color: Colors.black
-            ),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                icon: Icon(Icons.menu),
+                color: Colors.black),
           ),
         ],
       ),
