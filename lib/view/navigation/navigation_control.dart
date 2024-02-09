@@ -10,7 +10,7 @@ import '../home_screen/home_screen.dart';
 import '../profile_screen/profile_screen.dart';
 
 class NavigationControl extends StatelessWidget {
-  const NavigationControl({super.key});
+  const NavigationControl({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

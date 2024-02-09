@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TopDealsGrid extends StatelessWidget {
-  const TopDealsGrid({super.key});
+  const TopDealsGrid({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black,
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.80,
+      height: MediaQuery.of(context).size.height * 0.70,
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -35,13 +35,17 @@ class TopDealsGrid extends StatelessWidget {
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child:Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Icon(Icons.star, color: Colors.yellow,),
+                        const Icon(
+                          Icons.star,
+                          color: Colors.yellow,
+                        ),
                         const Text(
-                          'Reating' , style: TextStyle(color: Colors.white),
+                          'Reating',
+                          style: TextStyle(color: Colors.white),
                         ),
                       ],
                     ),

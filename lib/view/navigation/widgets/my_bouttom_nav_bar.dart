@@ -5,13 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../controler/navigaton_screen_cubit/navigationcontrol_cubit.dart';
 
 class MyBouttomNavBar extends StatelessWidget {
-  const MyBouttomNavBar({super.key});
+  const MyBouttomNavBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NavigationcontrolCubit, NavigationcontrolState>(
       builder: (context, state) {
         return BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           currentIndex: state.index,
           onTap: (index) {
             context.read<NavigationcontrolCubit>().changeIndex(index);

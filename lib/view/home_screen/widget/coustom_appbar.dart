@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../images.dart';
 
 class CoustomAppBar extends StatelessWidget {
-  const CoustomAppBar({super.key});
+  const CoustomAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

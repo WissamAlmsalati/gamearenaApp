@@ -9,7 +9,7 @@ import '../../constans.dart';
 import '../../shared_widget/coustom_text_filled.dart';
 
 class HomeScreenBody extends StatelessWidget {
-  const HomeScreenBody({super.key});
+  const HomeScreenBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class HomeScreenBody extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                     child: Text("Categories",)),
-                CoustomListView(),
+                CustomListView(),
                 const SizedBox(
                   height: 20,
                 ),

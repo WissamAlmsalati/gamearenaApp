@@ -5,7 +5,7 @@ import '../constans.dart';
 class CoustomTextFilled extends StatelessWidget {
   String? hintText;
   Icon? icon;
-   CoustomTextFilled({super.key,this.hintText,this.icon });
+   CoustomTextFilled({this.hintText,this.icon });
 
   @override
   Widget build(BuildContext context) {

@@ -9,7 +9,7 @@ import '../../search_screen/search_screen.dart';
 
 
 class AppMainScreens extends StatelessWidget {
-  const AppMainScreens({super.key});
+  const AppMainScreens({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
