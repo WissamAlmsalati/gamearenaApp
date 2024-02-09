@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store/model/product_model.dart';
 import 'package:store/view/categorys/widget/list_view_product_card.dart';
 
 class HeadPhoneCat extends StatelessWidget {
@@ -8,7 +9,7 @@ class HeadPhoneCat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("HeadPhoneCat")),
-      body:const Expanded(child: CardListView()),
+      body:Expanded(child:CardListView(products: ProductModel.headphones))
     );
   }
 }

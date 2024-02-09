@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:store/model/product_model.dart';
 
 class TopDealsGrid extends StatelessWidget {
   const TopDealsGrid({Key? key}) : super(key: key);
@@ -59,7 +60,9 @@ class TopDealsGrid extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Product Name"),
+                    Text(
+                      "Product Name",
+                    ),
                     const Row(
                       children: [
                         Text("Price"),

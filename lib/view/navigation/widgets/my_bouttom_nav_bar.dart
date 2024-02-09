@@ -21,28 +21,28 @@ class MyBouttomNavBar extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
-                color: Colors.lightBlue,
+                color: Colors.black,
               ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.search,
-                color: Colors.lightBlue,
+                color: Colors.black,
               ),
               label: 'Search',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.shopping_cart,
-                color: Colors.lightBlue,
+                color: Colors.black,
               ),
               label: 'Cart',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.person,
-                color: Colors.lightBlue,
+                color: Colors.black,
               ),
               label: 'Profile',
             ),

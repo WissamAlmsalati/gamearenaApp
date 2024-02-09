@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:store/view/detail_product_screen/detail_screen.dart';
 
 class CardWidget extends StatelessWidget {
-  const CardWidget({Key? key}) : super(key: key);
+  String productName;
+  String productDescription;
+  String productPrice;
+  String productImage;
+  CardWidget(
+      {required this.productName,
+      required this.productDescription,
+      required this.productPrice,
+      required this.productImage});
 
   @override
   Widget build(BuildContext context) {
@@ -13,38 +23,54 @@ class CardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: Colors.black,
       ),
-      child: Row(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(left: 15),
-            height: MediaQuery.of(context).size.height * 0.13,
-            width: MediaQuery.of(context).size.width * 0.27,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.red,
+      child: GestureDetector(
+        onTap: () {
+          Get.to(
+              () => DetailScreen(
+                    title: productName,
+                    image: productImage,
+                    price: productPrice,
+                    description: productDescription,
+                  ),
+              transition: Transition.fade);
+        },
+        child: Row(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(left: 15),
+              height: MediaQuery.of(context).size.height * 0.13,
+              width: MediaQuery.of(context).size.width * 0.27,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  image: NetworkImage(
+                    productImage,
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Product Name",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                Text(
-                  "Product Description",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-                Text(
-                  "Product Price",
-                ),
-              ],
-            ),
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    productName,
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  Text(
+                    productDescription,
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                  Text(productPrice,
+                      style: TextStyle(color: Colors.white, fontSize: 16)),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
