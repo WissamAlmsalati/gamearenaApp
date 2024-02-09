@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store/view/categorys/widget/list_view_product_card.dart';
 
 class KeyBoardCat extends StatelessWidget {
   const KeyBoardCat({Key? key}) : super(key: key);
@@ -7,9 +8,7 @@ class KeyBoardCat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("KeyBoardCat")),
-      body: Center(
-        child: Text(" KeyBoardCat"),
-      ),
+      body:const Expanded(child: CardListView()),
     );
   }
 }
