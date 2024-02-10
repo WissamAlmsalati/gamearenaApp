@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:store/view/auth_screens/sign_in.dart';
 import 'package:store/view/navigation/navigation_control.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      home: const NavigationControl(),
+      home: const SignIn(),
     );
   }
 }
