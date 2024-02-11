@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:store/services/firebase_auth.dart';
+import 'package:store/view/auth_screens/sign_in.dart';
 
 import '../../../Constants/images.dart';
 
@@ -30,7 +34,8 @@ class CoustomAppBar extends StatelessWidget {
           Builder(
             builder: (context) => IconButton(
                 onPressed: () {
-                  Scaffold.of(context).openDrawer();
+                  UserFirebaseAuth().SignOutFun();
+                  Get.to(() => SignIn());
                 },
                 icon: Icon(Icons.menu),
                 color: Colors.black),
@@ -39,4 +44,7 @@ class CoustomAppBar extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  List<Object?> get props => [];
 }

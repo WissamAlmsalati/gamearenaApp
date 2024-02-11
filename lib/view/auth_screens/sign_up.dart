@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:store/view/auth_screens/methode/validate_filds.dart';
 import 'package:store/view/auth_screens/sign_in.dart';
 import 'package:store/view/auth_screens/widgets/auth_text_filed.dart';
 
@@ -14,6 +14,7 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController = AuthController();
     TextEditingController firstNameController = TextEditingController();
     TextEditingController lastNameController = TextEditingController();
     TextEditingController emailController = TextEditingController();
@@ -34,48 +35,48 @@ class SignUp extends StatelessWidget {
               AuthTextFilled(
                 controller: firstNameController,
                 hintText: "First name",
-                icon: Icons.person, keyboardType: TextInputType.name,
+                icon: Icons.person,
+                keyboardType: TextInputType.name,
               ),
               AuthTextFilled(
-
                 controller: lastNameController,
                 hintText: "Last name",
-                icon: Icons.person, keyboardType: TextInputType.name,
+                icon: Icons.person,
+                keyboardType: TextInputType.name,
               ),
               AuthTextFilled(
                 controller: emailController,
                 hintText: "Email",
-                icon: Icons.email, keyboardType: TextInputType.emailAddress,
+                icon: Icons.email,
+                keyboardType: TextInputType.emailAddress,
               ),
               AuthTextFilled(
                 controller: phoneNumberController,
                 hintText: "Phone Number",
-                icon: Icons.phone, keyboardType: TextInputType.phone,
+                icon: Icons.phone,
+                keyboardType: TextInputType.phone,
               ),
               AuthTextFilled(
                 controller: passwordController,
                 hintText: "Password",
-                icon: Icons.lock, keyboardType: TextInputType.visiblePassword,
+                icon: Icons.lock,
+                keyboardType: TextInputType.visiblePassword,
               ),
               Row(
                 children: [
-
                   Text("I agree to the terms and conditions"),
                 ],
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.black,
-                  minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 50),
+                  minimumSize:
+                      Size(MediaQuery.of(context).size.width * 0.9, 50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {
-                  Get.find<UserFirebaseAuth>().SignUpFun(
-                      emailController.text, passwordController.text);
-                  Get.to(() => NavigationControl());
-                },
+                onPressed: () => authController.signUpFun(
+                    emailController, passwordController),
                 child: Text("Sign Up"),
               ),
               Row(

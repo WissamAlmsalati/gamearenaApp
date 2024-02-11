@@ -28,7 +28,6 @@ class CustomListView extends StatelessWidget {
             width: 80,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Colors.white,
                 side: BorderSide(color: Colors.black, width: 1),
                 elevation: 0,
                 shape: RoundedRectangleBorder(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:store/services/firebase_auth.dart';
+import 'package:store/view/auth_screens/methode/validate_filds.dart';
 import 'package:store/view/auth_screens/sign_up.dart';
 import 'package:store/view/auth_screens/widgets/auth_text_filed.dart';
 
@@ -12,17 +13,16 @@ import '../navigation/navigation_control.dart';
 class SignIn extends StatelessWidget {
   const SignIn({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-   late TextEditingController emailControler = TextEditingController();
-   late TextEditingController passwordControler = TextEditingController();
+    AuthController authController = AuthController();
 
+    TextEditingController emailControler = TextEditingController();
+    TextEditingController passwordControler = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-
       ),
       body: SafeArea(
         child: Padding(
@@ -36,15 +36,17 @@ class SignIn extends StatelessWidget {
               AuthTextFilled(
                 controller: emailControler,
                 hintText: "Email",
-                icon: Icons.email, keyboardType: TextInputType.emailAddress,
+                icon: Icons.email,
+                keyboardType: TextInputType.emailAddress,
               ),
               AuthTextFilled(
                 controller: passwordControler,
                 hintText: "Password",
-                icon: Icons.lock, keyboardType: TextInputType.visiblePassword,
+                icon: Icons.lock,
+                keyboardType: TextInputType.visiblePassword,
               ),
               Row(
-                children:[
+                children: [
                   Checkbox(
                     value: false,
                     onChanged: (bool? newValue) {
@@ -57,30 +59,29 @@ class SignIn extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.black,
-
-              minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 50),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize:
+                      Size(MediaQuery.of(context).size.width * 0.9, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: () =>
+                    authController.signInFun(emailControler, passwordControler),
+                child: Text("Sign In"),
               ),
-            ),
-            onPressed:()=> login(emailControler, passwordControler),
-            child: Text("Sign In"),
-          ),
-
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
-
               Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("Don't have an account?"),
                   TextButton(
                     onPressed: () {
-            Get.to(()=>SignUp());    },
+                      Get.to(() => SignUp());
+                    },
                     child: Text("Sign Up"),
                   ),
                 ],
@@ -90,13 +91,15 @@ class SignIn extends StatelessWidget {
         ),
       ),
     );
-
   }
-  Future<void> login( emailControler, passwordControler) async {
-    try{
-      Get.find<UserFirebaseAuth>().SignInFun(emailControler.text, passwordControler.text);
-      Get.to(()=>NavigationControl());
+
+  Future<void> login(emailControler, passwordControler) async {
+    try {
+      Get.find<UserFirebaseAuth>()
+          .SignInFun(emailControler.text, passwordControler.text);
+      Get.to(() => NavigationControl());
     } catch (e) {
       print(e);
-    }}
+    }
+  }
 }
