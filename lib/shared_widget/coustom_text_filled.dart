@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../Constants/constans.dart';
 
-class CoustomTextFilled extends StatelessWidget {
+class CustomTextFilled extends StatelessWidget {
   String? hintText;
   Icon? icon;
-   CoustomTextFilled({this.hintText,this.icon });
+   CustomTextFilled({this.hintText,this.icon });
 
   @override
   Widget build(BuildContext context) {

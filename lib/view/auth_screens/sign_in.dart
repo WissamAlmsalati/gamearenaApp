@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:store/Constants/images.dart';
 import 'package:store/services/firebase_auth.dart';
 import 'package:store/view/auth_screens/methode/validate_filds.dart';
-import 'package:store/view/auth_screens/sign_up.dart';
 import 'package:store/view/auth_screens/widgets/auth_text_filed.dart';
+import 'package:store/view/navigation/navigation_control.dart';
+import "package:store/view/auth_screens/sign_up.dart";
 
-import '../../Constants/images.dart';
-import '../navigation/navigation_control.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({Key? key}) : super(key: key);

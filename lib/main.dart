@@ -2,12 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:store/firebase_options.dart';
 import 'package:store/services/firebase_auth.dart';
-import 'package:store/view/auth_screens/sign_in.dart';
 import 'package:store/view/auth_screens/sign_up.dart';
-import 'package:store/view/navigation/navigation_control.dart';
+import 'view/navigation/navigation_control.dart';
 
-import 'firebase_options.dart';
+
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

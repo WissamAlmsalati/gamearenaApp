@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:store/model/product_model.dart';
 
 class CartCubit extends Cubit<List<ProductModel>> {

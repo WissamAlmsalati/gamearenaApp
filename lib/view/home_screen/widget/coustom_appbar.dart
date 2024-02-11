@@ -34,8 +34,29 @@ class CoustomAppBar extends StatelessWidget {
           Builder(
             builder: (context) => IconButton(
                 onPressed: () {
-                  UserFirebaseAuth().SignOutFun();
-                  Get.to(() => SignIn());
+                  showCupertinoDialog(
+                      context: context,
+                      builder: (context) {
+                        return CupertinoAlertDialog(
+                          title: Text("Log out"),
+                          content: Text("Are you sure you want to log out?"),
+                          actions: [
+                            CupertinoDialogAction(
+                              child: Text("Yes"),
+                              onPressed: () {
+                                UserFirebaseAuth().SignOutFun();
+                                Get.offAll(SignIn());
+                              },
+                            ),
+                            CupertinoDialogAction(
+                              child: Text("No"),
+                              onPressed: () {
+                                Get.back();
+                              },
+                            ),
+                          ],
+                        );
+                      });
                 },
                 icon: Icon(Icons.menu),
                 color: Colors.black),

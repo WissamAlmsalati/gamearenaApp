@@ -4,10 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:store/view/auth_screens/methode/validate_filds.dart';
 import 'package:store/view/auth_screens/sign_in.dart';
 import 'package:store/view/auth_screens/widgets/auth_text_filed.dart';
-
 import '../../Constants/images.dart';
-import '../../services/firebase_auth.dart';
-import '../navigation/navigation_control.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);

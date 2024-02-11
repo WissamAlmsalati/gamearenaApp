@@ -25,7 +25,7 @@ class HomeScreenBody extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                CoustomTextFilled(
+                CustomTextFilled(
                   hintText: "Try Search Here",
                   icon:const Icon(Icons.search),
                 ),

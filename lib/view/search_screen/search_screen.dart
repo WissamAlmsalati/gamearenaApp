@@ -14,7 +14,7 @@ class SearchScreen extends StatelessWidget {
             height: 20,
           ),
           Center(
-            child: CoustomTextFilled(
+            child: CustomTextFilled(
               hintText: "Search",
             ),
           ),

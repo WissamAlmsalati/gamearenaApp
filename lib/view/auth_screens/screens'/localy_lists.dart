@@ -1,4 +1,4 @@
-import 'Constants/images.dart';
+import '../../../Constants/images.dart';
 
 class ads{
   static  List<String> adsList = [

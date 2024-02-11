@@ -74,4 +74,8 @@ class CardWidget extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  List<Object?> get props =>
+      [productName, productDescription, productPrice, productImage];
 }
