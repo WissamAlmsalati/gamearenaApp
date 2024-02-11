@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/Constants/constans.dart';
-import 'package:store/view/auth_screens/screens'/localy_lists.dart';
+import 'package:store/view/auth_screens/screens/localy_lists.dart';
 
 import '../../../controler/ads_container_pageControler_cubit/ads_container_controler_cubit.dart';
 
