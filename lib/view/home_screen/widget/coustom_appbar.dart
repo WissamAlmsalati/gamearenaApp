@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../images.dart';
+import '../../../Constants/images.dart';
 
 class CoustomAppBar extends StatelessWidget {
   const CoustomAppBar({Key? key}) : super(key: key);

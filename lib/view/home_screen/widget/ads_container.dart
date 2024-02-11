@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:store/constans.dart';
+import 'package:store/Constants/constans.dart';
 import 'package:store/localy_lists.dart';
 
 import '../../../controler/ads_container_pageControler_cubit/ads_container_controler_cubit.dart';

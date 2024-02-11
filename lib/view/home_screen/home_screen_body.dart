@@ -5,7 +5,7 @@ import 'package:store/view/home_screen/widget/ads_container.dart';
 import 'package:store/view/home_screen/widget/category_listview.dart';
 import 'package:store/view/home_screen/widget/coustom_appbar.dart';
 
-import '../../constans.dart';
+import '../../Constants/constans.dart';
 import '../../shared_widget/coustom_text_filled.dart';
 
 class HomeScreenBody extends StatelessWidget {
