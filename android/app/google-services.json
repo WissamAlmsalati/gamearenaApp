@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "32663286420",
+    "project_id": "gamearena-8237a",
+    "storage_bucket": "gamearena-8237a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32663286420:android:06d35f43bc78de822d3a81",
+        "android_client_info": {
+          "package_name": "com.example.store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3pVcY_uhtU6trALtI0vvqAv__zNzCSgE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
