@@ -72,16 +72,13 @@ class SignUp extends StatelessWidget {
                   ),
                   onPressed: () {
                     // Call signUpAndCreateDocument on UserCredit, not on an instance of UserCredit
-                    UserCredit.signUpAndCreateDocument(
-                      emailController.text,
-                      passwordController.text,
-                      firstNameController.text,
-                      lastNameController.text,
-                      {
-                        'phoneNumber': phoneNumberController.text,
-                      },
-                    );
-                  },
+                    AuthController().signUpFun(
+                      emailController,
+                      passwordController,
+                      firstNameController,
+                      lastNameController,
+                      phoneNumberController,
+                    );},
                   child: Text("Sign Up"),
                 ),
                 Row(

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:store/Constants/images.dart';
-import 'package:store/services/firebase_auth.dart';
 import 'package:store/view/auth_screens/methode/validate_filds.dart';
 import 'package:store/view/auth_screens/widgets/auth_text_filed.dart';
 import 'package:store/view/navigation/navigation_control.dart';
@@ -65,8 +64,8 @@ class SignIn extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () =>
-                    authController.signInFun(emailControler, passwordControler),
+                onPressed: () {},
+
                 child: Text("Sign In"),
               ),
               SizedBox(
@@ -89,15 +88,5 @@ class SignIn extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<void> login(emailControler, passwordControler) async {
-    try {
-      Get.find<UserFirebaseAuth>()
-          .SignInFun(emailControler.text, passwordControler.text);
-      Get.to(() => NavigationControl());
-    } catch (e) {
-      print(e);
-    }
   }
 }

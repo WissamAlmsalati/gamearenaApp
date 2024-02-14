@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:store/services/firebase_auth.dart';
 import 'package:store/view/auth_screens/sign_in.dart';
 
 import '../../../Constants/images.dart';
+import '../../../services/firebase_create_new_credintal_user.dart';
 
 class CoustomAppBar extends StatelessWidget {
   const CoustomAppBar({Key? key}) : super(key: key);
@@ -44,7 +44,7 @@ class CoustomAppBar extends StatelessWidget {
                             CupertinoDialogAction(
                               child: Text("Yes"),
                               onPressed: () {
-                                UserFirebaseAuth().SignOutFun();
+                                UserCredit.signOut();
                                 Get.offAll(SignIn());
                               },
                             ),

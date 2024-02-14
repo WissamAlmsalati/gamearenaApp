@@ -3,6 +3,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserCredit {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Stream<User?> get authStateChanges => _auth.authStateChanges();
+
   // Make handleError a static method so it can be called from other static methods
   static void handleError(String message) {
     print(message);
@@ -66,5 +71,10 @@ class UserCredit {
       handleError(e.toString());
       return null;
     }
+  }
+
+  //create a methode for sign out
+  static Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 }
