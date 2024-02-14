@@ -6,6 +6,7 @@ import 'package:store/view/auth_screens/sign_in.dart';
 import 'package:store/view/auth_screens/widgets/auth_text_filed.dart';
 import '../../Constants/images.dart';
 import '../../services/firebase_create_new_credintal_user.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -25,7 +26,6 @@ class SignUp extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10),
           child: SingleChildScrollView(
-           
             child: Column(
               children: [
                 Image.asset(Images.textLogo),
@@ -71,11 +71,17 @@ class SignUp extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                  UserCredit().signUpAndCreateDocument(
-                    
-                  )
-                    
+                    // Call signUpAndCreateDocument on UserCredit, not on an instance of UserCredit
+                    UserCredit.signUpAndCreateDocument(
+                      emailController.text,
+                      passwordController.text,
+                      firstNameController.text,
+                      lastNameController.text,
+                      {
+                        'phoneNumber': phoneNumberController.text,
                       },
+                    );
+                  },
                   child: Text("Sign Up"),
                 ),
                 Row(

@@ -2,49 +2,69 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-class UserCredit{
-  
-
-  // Replace with your actual error handling functions
-void handleError(String message) {
-  // Log error message, display user-friendly alert, etc.
-  print(message);
-}
-
-static Future<bool> signUpAndCreateDocument(String email, String password, String firstName, String lastName, [Map<String, dynamic>? additionalFields]) async {
-  // User creation
-  try {
-    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    String userId = userCredential.user!.uid;
-
-    // User data preparation
-    Map<String, dynamic> userData = {
-      'userId': userId,
-      'email': email,
-      'firstName': firstName,
-      'lastName': lastName,
-      // Add any additional fields if provided
-      ...?additionalFields,
-    };
-
-    // Document creation
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .set(userData);
-
-    return true; // Sign-up and document creation successful
-  } on FirebaseAuthException catch (e) {
-    handleError("Error creating user: ${e.message}");
-  } catch (e) {
-    handleError("Error creating document: ${e.toString()}");
+class UserCredit {
+  // Make handleError a static method so it can be called from other static methods
+  static void handleError(String message) {
+    print(message);
   }
-  return false; // Sign-up or document creation failed
-}
 
+  static Future<bool> signUpAndCreateDocument(
+      String email, String password, String firstName, String lastName,
+      [Map<String, dynamic>? additionalFields]) async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      String userId = userCredential.user!.uid;
 
+      Map<String, dynamic> userData = {
+        'userId': userId,
+        'email': email,
+        'firstName': firstName,
+        'lastName': lastName,
+        ...?additionalFields,
+      };
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .set(userData);
+
+      // Return true if user creation and document creation succeed
+      return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        handleError('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        handleError('The account already exists for that email.');
+      }
+      // Return false if user creation fails
+      return false;
+    } catch (e) {
+      handleError(e.toString());
+      // Return false if an unexpected error occurs
+      return false;
+    }
+  }
+
+  static Future<Map<String, dynamic>?> getUserData(String userId) async {
+    try {
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .get();
+
+      if (documentSnapshot.exists) {
+        return documentSnapshot.data() as Map<String, dynamic>;
+      } else {
+        print('No user found with this ID');
+        return null;
+      }
+    } catch (e) {
+      handleError(e.toString());
+      return null;
+    }
+  }
 }
