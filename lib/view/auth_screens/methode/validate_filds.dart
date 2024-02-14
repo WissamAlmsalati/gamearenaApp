@@ -3,12 +3,12 @@ import 'package:store/services/firebase_auth.dart';
 import 'package:store/view/navigation/navigation_control.dart';
 
 class AuthController {
-  void signUpFun(emailController, passwordController) {
+  void signUpFun(emailController, passwordController,firstnameCnotroler,lastnameControler,phoneControler) {
     bool validfun = validatefildes(emailController, passwordController);
     if (validfun == true) {
       try {
         UserFirebaseAuth()
-            .SignUpFun(emailController.text, passwordController.text);
+            .SignUpFun(emailController.text, passwordController.text ,firstnameCnotroler.text,lastnameControler.text,phoneControler.text);
         Get.to(() => NavigationControl());
       } catch (e) {
         Get.snackbar(

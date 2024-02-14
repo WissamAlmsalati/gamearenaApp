@@ -37,13 +37,11 @@ class SignIn extends StatelessWidget {
                 controller: emailControler,
                 hintText: "Email",
                 icon: Icons.email,
-                keyboardType: TextInputType.emailAddress,
               ),
               AuthTextFilled(
                 controller: passwordControler,
                 hintText: "Password",
                 icon: Icons.lock,
-                keyboardType: TextInputType.visiblePassword,
               ),
               Row(
                 children: [
