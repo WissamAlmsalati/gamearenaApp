@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProductPhotos extends StatelessWidget {
-  const ProductPhotos({Key? key}) : super(key: key);
+  String? image;
+   ProductPhotos({Key? key,required this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +13,12 @@ class ProductPhotos extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.22,
             width: MediaQuery.of(context).size.width * 0.9,
             decoration: BoxDecoration(
-              color: Colors.red,
+
               borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: Image.network(image!).image,
+                fit: BoxFit.cover,
+              ),
             ),
             // child: Image.asset(image)
           ),

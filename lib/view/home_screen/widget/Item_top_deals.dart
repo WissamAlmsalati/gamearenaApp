@@ -7,6 +7,8 @@ class TopDealsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Container(
       color: Colors.black,
       width: double.infinity,
@@ -31,7 +33,7 @@ class TopDealsGrid extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8, top: 8),
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.029,
-                    width: MediaQuery.of(context).size.width * 0.20,
+                    width: MediaQuery.of(context).size.width * 0.30,
                     decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(6),
@@ -44,15 +46,18 @@ class TopDealsGrid extends StatelessWidget {
                           Icons.star,
                           color: Colors.yellow,
                         ),
-                        const Text(
+                         Text(
                           'Reating',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Colors.white,
+                            fontSize: screenWidth * 0.03, // Adjust the value as needed
+
+                          ),
                         ),
                       ],
                     ),
                   )),
               Container(
-                height: 100,
+                height: MediaQuery.of(context).size.height*0.09,
                 width: double.infinity,
               ),
               Padding(

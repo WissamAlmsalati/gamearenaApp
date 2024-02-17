@@ -8,6 +8,8 @@ import 'package:store/view/auth_screens/widgets/auth_text_filed.dart';
 import 'package:store/view/navigation/navigation_control.dart';
 import "package:store/view/auth_screens/sign_up.dart";
 
+import '../../services/firebase_create_new_credintal_user.dart';
+
 
 class SignIn extends StatelessWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -16,8 +18,8 @@ class SignIn extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthController authController = AuthController();
 
-    TextEditingController emailControler = TextEditingController();
-    TextEditingController passwordControler = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -33,12 +35,12 @@ class SignIn extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.05,
               ),
               AuthTextFilled(
-                controller: emailControler,
+                controller: emailController,
                 hintText: "Email",
                 icon: Icons.email,
               ),
               AuthTextFilled(
-                controller: passwordControler,
+                controller: passwordController,
                 hintText: "Password",
                 icon: Icons.lock,
               ),
@@ -64,7 +66,23 @@ class SignIn extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+                    bool signInSuccess = await UserCredit.signInFun(
+                      emailController.text,
+                      passwordController.text,
+                    );
+
+                    if (signInSuccess) {
+                      print('User signed in successfully');
+                      // Navigate to the next screen
+                    } else {
+                      print('Sign in failed');
+                    }
+                  } else {
+                    print('Email or password field is empty');
+                  }
+                },
 
                 child: Text("Sign In"),
               ),

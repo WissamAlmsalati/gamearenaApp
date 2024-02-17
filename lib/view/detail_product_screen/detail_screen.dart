@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/view/detail_product_screen/widget/product_photos.dart';
 
-class DetailScreen extends StatelessWidget {
+import '../../cart_list.dart';
+import '../../model/product_model.dart';
+
+class DetailScreen extends StatefulWidget {
   final String title;
   final String image;
   final String price;
@@ -14,6 +18,11 @@ class DetailScreen extends StatelessWidget {
       required this.description});
 
   @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
@@ -22,13 +31,12 @@ class DetailScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 20),
-            child: Text(title, style: const TextStyle(fontSize: 20)),
+            child: Text(widget.title, style: const TextStyle(fontSize: 20)),
           ),
           const SizedBox(
             height: 10,
           ),
-          const ProductPhotos(),
-          const SizedBox(
+          ProductPhotos(image: widget.image),        const SizedBox(
             height: 10,
           ),
           Padding(
@@ -54,16 +62,35 @@ class DetailScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Add to cart",
-                      )),
+                    onPressed: () {
+                      try{
+                        CartList.cart.add(
+                          ProductModel(
+                            productName: widget.title,
+                            productDescription: widget.description,
+                            productPrice: widget.price,
+                            productImage: widget.image,
+                          ),
+                        );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Added to cart'),
+                                duration: Duration(seconds: 2),
+                              ),
+                        );
+                      } catch(e){
+                        print(e);
+                      }
+
+                    },
+                    child: Text("Add to cart"),
+                )
                 ),
                 const SizedBox(
                   width: 20,
                 ),
                 Text(
-                  price,
+                  widget.price,
                   style: const TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ],

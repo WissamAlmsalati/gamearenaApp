@@ -3,23 +3,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class AdminAddProduct {
-  static Future<void> addProductToCollection(String productName, String productPrice, String productDescription, String imageUrl) async {
-    try {
-      // Add product data to Firestore
-      await FirebaseFirestore.instance.collection('products').add({
-        'productName': productName,
-        'productPrice': productPrice,
-        'productDescription': productDescription,
-        'productImage': imageUrl,
-      });
+static Future<void> addProductToCollection(String collectionName, String productName, String productPrice, String productDescription, String imageUrl) async {
+  try {
+    // Add product data to Firestore
+    await FirebaseFirestore.instance.collection(collectionName).add({
+      'productName': productName,
+      'productPrice': productPrice,
+      'productDescription': productDescription,
+      'productImage': imageUrl,
+    });
 
-      print('Product added successfully.');
-    } catch (e) {
-      print('Error adding product: $e');
-      // Throw the error again to handle it in the calling code if needed
-      throw e;
-    }
+    print('Product added successfully.');
+  } catch (e) {
+    print('Error adding product: $e');
+    // Throw the error again to handle it in the calling code if needed
+    throw e;
   }
+}
 
   static Future<String> uploadImageToFirebase(File file) async {
     try {

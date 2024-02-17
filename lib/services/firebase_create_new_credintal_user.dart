@@ -54,6 +54,33 @@ class UserCredit {
     }
   }
 
+  static Future<bool> signInFun(String email, String password) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      if (userCredential.user != null) {
+        print('User signed in successfully');
+        // Return true if sign in is successful
+        return true;
+      } else {
+        print('Sign in failed');
+        // Return false if sign in fails
+        return false;
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        handleError('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        handleError('Wrong password provided for that user.');
+      }
+      // Return false if sign in fails
+      return false;
+    }
+  }
+
   static Future<Map<String, dynamic>?> getUserData(String userId) async {
     try {
       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
@@ -72,6 +99,7 @@ class UserCredit {
       return null;
     }
   }
+
 
   //create a methode for sign out
   static Future<void> signOut() async {

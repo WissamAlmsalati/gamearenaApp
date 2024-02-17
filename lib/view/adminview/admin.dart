@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:store/view/adminview/viewProducts.dart';
 
 import 'addProducts/addProducts.dart';
 
@@ -20,6 +21,12 @@ class AdminScreen extends StatelessWidget {
             }, child: Text("Add Product")),
             ElevatedButton(onPressed: (){}, child: Text("Add Category")),
             ElevatedButton(onPressed: (){}, child: Text("Add Ads")),
+            ElevatedButton(onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ViewAllProductsScreen()),
+              );
+            }, child: Text("View Products")),
           ],
         ),
       )

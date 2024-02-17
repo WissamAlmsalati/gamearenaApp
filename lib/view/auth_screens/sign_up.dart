@@ -74,14 +74,22 @@ class SignUp extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    // Call signUpAndCreateDocument on UserCredit, not on an instance of UserCredit
-                    AuthController().signUpFun(
-                      emailController,
-                      passwordController,
-                      firstNameController,
-                      lastNameController,
-                      phoneNumberController,
-                    );},
+  if (emailController.text.isNotEmpty &&
+      passwordController.text.isNotEmpty &&
+      firstNameController.text.isNotEmpty &&
+      lastNameController.text.isNotEmpty &&
+      phoneNumberController.text.isNotEmpty) {
+    AuthController().signUpFun(
+      emailController,
+      passwordController,
+      firstNameController,
+      lastNameController,
+      phoneNumberController,
+    );
+  } else {
+    print('One or more fields are empty');
+  }
+},
                   child: Text("Sign Up"),
                 ),
                 Row(
@@ -90,7 +98,7 @@ class SignUp extends StatelessWidget {
                     Text("Already have an account?"),
                     TextButton(
                       onPressed: () {
-                        Get.to(() => NavigationControl());
+                        Get.to(() => SignIn());
                       },
                       child: Text("Sign In"),
                     ),

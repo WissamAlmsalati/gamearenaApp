@@ -10,6 +10,10 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
+  String? _selectedCategory;
+
+  List<String> _categories = ['screens', 'headphones', 'mouses', 'keyboards'];
+
   final _formKey = GlobalKey<FormState>();
   final ImagePicker _picker = ImagePicker();
   File? _imageFile;
@@ -30,29 +34,29 @@ class _AddProductScreenState extends State<AddProductScreen> {
   }
 
   Future<void> _submit() async {
-    if (_formKey.currentState!.validate() && _imageFile != null) {
+    if (_formKey.currentState!.validate() && _imageFile != null && _selectedCategory != null) {
       _formKey.currentState!.save();
-try{
-  String imageUrl = await AdminAddProduct.uploadImageToFirebase(_imageFile!);
-      await AdminAddProduct.addProductToCollection(
-        _productName!,
-        _productPrice!,
-        _productDescription!,
-        imageUrl,
-      );
-ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Product added successfully.'),
-        ),
-      );
-}catch(e){
-  ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error adding product: $e'),
-        ),
-      );
-
-}
+      try {
+        String imageUrl = await AdminAddProduct.uploadImageToFirebase(_imageFile!);
+        await AdminAddProduct.addProductToCollection(
+          _selectedCategory!,
+          _productName!,
+          _productPrice!,
+          _productDescription!,
+          imageUrl,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Product added successfully.'),
+          ),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error adding product: $e'),
+          ),
+        );
+      }
     }
   }
 
@@ -67,23 +71,43 @@ ScaffoldMessenger.of(context).showSnackBar(
         child: ListView(
           padding: EdgeInsets.all(16.0),
           children: [
+            DropdownButtonFormField<String>(
+              value: _selectedCategory,
+              decoration: InputDecoration(labelText: 'Product Category'),
+              items: _categories.map((String category) {
+                return DropdownMenuItem<String>(
+                  value: category,
+                  child: Text(category),
+                );
+              }).toList(),
+              onChanged: (String? value) {
+                setState(() {
+                  _selectedCategory = value;
+                });
+              },
+              validator: (value) =>
+              value == null ? 'Please select a category.' : null,
+            ),
             TextFormField(
               decoration: InputDecoration(labelText: 'Product Name'),
-              validator: (value) => value!.isEmpty ? 'Please enter a product name.' : null,
+              validator: (value) =>
+              value!.isEmpty ? 'Please enter a product name.' : null,
               onSaved: (value) => _productName = value,
             ),
             TextFormField(
               decoration: InputDecoration(labelText: 'Product Price'),
-              validator: (value) => value!.isEmpty ? 'Please enter a product price.' : null,
+              validator: (value) =>
+              value!.isEmpty ? 'Please enter a product price.' : null,
               onSaved: (value) => _productPrice = value,
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Product Description'),
-              validator: (value) => value!.isEmpty ? 'Please enter a product description.' : null,
+              decoration:
+              InputDecoration(labelText: 'Product Description'),
+              validator: (value) =>
+              value!.isEmpty ? 'Please enter a product description.' : null,
               onSaved: (value) => _productDescription = value,
             ),
-            if (_imageFile != null)
-              Image.file(_imageFile!),
+            if (_imageFile != null) Image.file(_imageFile!),
             ElevatedButton(
               onPressed: _pickImage,
               child: Text('Pick Image'),

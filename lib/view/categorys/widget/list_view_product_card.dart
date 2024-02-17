@@ -12,10 +12,10 @@ class CardListView extends StatelessWidget {
     return ListView.builder(
         itemCount: products.length,
         itemBuilder: (context, index) => CardWidget(
-              productName: products[index].name,
-              productDescription: products[index].description,
-              productPrice: products[index].price.toString(),
-              productImage: products[index].image,
-      ));
+          productName: products[index].productName,
+          productDescription: products[index].productDescription,
+          productPrice: products[index].productPrice.toString(),
+          productImage: products[index].productImage,
+        ));
   }
 }
