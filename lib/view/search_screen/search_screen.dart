@@ -1,6 +1,12 @@
-import 'package:flutter/cupertino.dart';
+
+
+
+
 import 'package:flutter/material.dart';
-import 'package:store/shared_widget/coustom_text_filled.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+
+import '../../shared_widget/coustom_text_filled.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -15,6 +21,7 @@ class SearchScreen extends StatelessWidget {
           ),
           Center(
             child: CustomTextFilled(
+              controller: TextEditingController(),
               hintText: "Search",
             ),
           ),
@@ -23,3 +30,4 @@ class SearchScreen extends StatelessWidget {
     );
   }
 }
+

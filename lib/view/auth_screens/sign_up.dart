@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:store/controler/navigaton_screen_cubit/navigationcontrol_cubit.dart';
 import 'package:store/view/auth_screens/methode/validate_filds.dart';
 import 'package:store/view/auth_screens/sign_in.dart';
 import 'package:store/view/auth_screens/widgets/auth_text_filed.dart';
 import '../../Constants/images.dart';
 import '../../services/firebase_create_new_credintal_user.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import '../navigation/navigation_control.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -87,7 +90,7 @@ class SignUp extends StatelessWidget {
                     Text("Already have an account?"),
                     TextButton(
                       onPressed: () {
-                        Get.to(() => SignIn());
+                        Get.to(() => NavigationControl());
                       },
                       child: Text("Sign In"),
                     ),

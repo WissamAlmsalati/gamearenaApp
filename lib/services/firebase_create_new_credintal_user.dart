@@ -7,14 +7,13 @@ class UserCredit {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Stream<User?> get authStateChanges => _auth.authStateChanges();
-
   // Make handleError a static method so it can be called from other static methods
+
   static void handleError(String message) {
     print(message);
   }
-
-  static Future<bool> signUpAndCreateDocument(
-      String email, String password, String firstName, String lastName,
+  static Future<bool> signUpAndCreateDocument(String email, String password,
+      String firstName, String lastName,String phone, String? roleAcount,
       [Map<String, dynamic>? additionalFields]) async {
     try {
       UserCredential userCredential =
@@ -29,7 +28,8 @@ class UserCredit {
         'email': email,
         'firstName': firstName,
         'lastName': lastName,
-        ...?additionalFields,
+        'phone':phone,
+        'roleAcount': roleAcount,
       };
 
       await FirebaseFirestore.instance

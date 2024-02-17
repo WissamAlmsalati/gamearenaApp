@@ -10,7 +10,7 @@ class AuthController {
     if (validfun == true) {
       try {
         UserCredit.signUpAndCreateDocument(
-            emailController.text, passwordController.text,firstnameCnotroler.text,lastnameControler.text,{'phone':phoneControler.text});
+            emailController.text, passwordController.text,firstnameCnotroler.text,lastnameControler.text,phoneControler.text,'user');
         Get.to(() => NavigationControl());
       } catch (e) {
         Get.snackbar(

@@ -5,7 +5,9 @@ import '../Constants/constans.dart';
 class CustomTextFilled extends StatelessWidget {
   String? hintText;
   Icon? icon;
-   CustomTextFilled({this.hintText,this.icon });
+  TextEditingController? controller;
+
+   CustomTextFilled({this.hintText,this.icon, required controller });
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class CustomTextFilled extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10),
           child: TextField(
+            controller: controller,
             decoration: InputDecoration(
               hintText: hintText,
               fillColor: Colors.white,

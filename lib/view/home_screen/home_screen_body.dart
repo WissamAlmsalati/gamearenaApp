@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:store/view/home_screen/widget/Item_top_deals.dart';
@@ -13,6 +14,8 @@ class HomeScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
     AppDimension appDimension = AppDimension(context);
     return Scaffold(
       body: SafeArea(
@@ -27,7 +30,7 @@ class HomeScreenBody extends StatelessWidget {
                 ),
                 CustomTextFilled(
                   hintText: "Try Search Here",
-                  icon:const Icon(Icons.search),
+                  icon:const Icon(Icons.search), controller: TextEditingController(),
                 ),
                 const SizedBox(
                   height: 20,
