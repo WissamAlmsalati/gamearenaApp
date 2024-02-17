@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:store/model/product_model.dart';
 import 'package:store/view/categorys/widget/list_view_product_card.dart';
-
 import '../data/data_from_firebase.dart';
 
 class DeskCat extends StatelessWidget {
@@ -10,8 +9,7 @@ class DeskCat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = GetCollictionData('DeskCat').getCollectionData();
-
+    final data = CollectionsData().deskCollection;
     return Scaffold(
       appBar: AppBar(title:const Text("DeskCat")),
       body: FutureBuilder<QuerySnapshot>(

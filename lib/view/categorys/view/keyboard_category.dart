@@ -10,7 +10,7 @@ class KeyBoardCat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-final data = GetCollictionData('keyboards').getCollectionData();
+final data = CollectionsData().keyboards;
     return Scaffold(
       appBar: AppBar(title: Text("kayboards")),
       body: FutureBuilder<QuerySnapshot>(

@@ -21,4 +21,22 @@ class ProductModel {
       productImage: snapshot['productImage'],
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'productName': productName,
+      'productPrice': productPrice,
+      'productDescription': productDescription,
+      'productImage': productImage,
+    };
+  }
+
+  factory ProductModel.fromMap(Map<String, dynamic> map) {
+    return ProductModel(
+      productName: map['productName'],
+      productPrice: map['productPrice'],
+      productDescription: map['productDescription'],
+      productImage: map['productImage'],
+    );
+  }
 }

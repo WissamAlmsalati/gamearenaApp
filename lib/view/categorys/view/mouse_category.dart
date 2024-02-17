@@ -12,7 +12,7 @@ class MouseCat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = GetCollictionData('mouses').getCollectionData();
+    final data = CollectionsData().mouse;
     return Scaffold(
       appBar: AppBar(title: Text("mouses")),
       body: FutureBuilder<QuerySnapshot>(

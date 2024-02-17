@@ -9,7 +9,7 @@ class GpuCat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = GetCollictionData('gpus').getCollectionData();
+    final data = CollectionsData().gpuCollection;
 
     return Scaffold(
       appBar: AppBar(title: Text("GpuCat")),

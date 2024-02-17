@@ -10,7 +10,7 @@ class HeadPhoneCat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = GetCollictionData('headphones').getCollectionData();
+    final data = CollectionsData().headphones;
 
     return Scaffold(
       appBar: AppBar(title: Text("HeadPhoneCat")),

@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:store/model/product_model.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import '../../../model/product_model.dart';
+import '../../categorys/data/data_from_firebase.dart';
 
 class TopDealsGrid extends StatelessWidget {
   const TopDealsGrid({Key? key}) : super(key: key);
@@ -9,81 +12,89 @@ class TopDealsGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Container(
-      color: Colors.black,
-      width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.70,
-      child: GridView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 2,
-          mainAxisExtent: 200,
-          mainAxisSpacing: 2,
-        ),
-        itemCount: 6,
-        itemBuilder: (context, index) => Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return FutureBuilder<QuerySnapshot>(
+      future: CollectionsData.combineCollections(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                  padding: const EdgeInsets.only(left: 8, top: 8),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.029,
-                    width: MediaQuery.of(context).size.width * 0.30,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                        ),
-                         Text(
-                          'Reating',
-                          style: TextStyle(color: Colors.white,
-                            fontSize: screenWidth * 0.03, // Adjust the value as needed
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              ),
+              SpinKitFadingCube(color: Colors.black, size: 50.0)
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else {
+          if (snapshot.data!.size == 0) {
+            return Center(child: Text('No data available'));
+          } else {
+            final products = snapshot.data!.docs
+                .map((doc) => ProductModel.fromSnapshot(doc))
+                .toList();
 
+            return Container(
+              color: Colors.black,
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.70,
+              child: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 2,
+                  mainAxisExtent: 200,
+                  mainAxisSpacing: 2,
+                ),
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  final product = products[index];
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.15,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: NetworkImage(product.productImage),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8, top: 8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(product.productName),
+                              const Row(
+                                children: [
+                                  Text("Price"),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text("Discount"),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                  )),
-              Container(
-                height: MediaQuery.of(context).size.height*0.09,
-                width: double.infinity,
+                  );
+                },
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8, top: 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Product Name",
-                    ),
-                    const Row(
-                      children: [
-                        Text("Price"),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text("Discount"),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+            );
+          }
+        }
+      },
     );
   }
 }

@@ -10,7 +10,7 @@ class MonitorCat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = GetCollictionData('screens').getCollectionData();
+    final data = CollectionsData().monitor;
     return Scaffold(
       appBar: AppBar(title: Text("Monitor")),
       body: FutureBuilder<QuerySnapshot>(
