@@ -75,6 +75,7 @@ class SignIn extends StatelessWidget {
 
                     if (signInSuccess) {
                       print('User signed in successfully');
+                      Get.to(() => NavigationControl());
                       // Navigate to the next screen
                     } else {
                       print('Sign in failed');

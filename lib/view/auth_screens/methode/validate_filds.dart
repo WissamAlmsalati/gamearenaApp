@@ -11,6 +11,7 @@ class AuthController {
       try {
         UserCredit.signUpAndCreateDocument(
             emailController.text, passwordController.text,firstnameCnotroler.text,lastnameControler.text,phoneControler.text,'user');
+        print("user created");
         Get.to(() => NavigationControl());
       } catch (e) {
         Get.snackbar(

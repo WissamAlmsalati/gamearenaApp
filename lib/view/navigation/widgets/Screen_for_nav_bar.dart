@@ -15,7 +15,7 @@ class AppMainScreens extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> _screens = [
       const HomeScreen(),
-      const SearchScreen(),
+       SearchScreen(),
       const CartScreen(),
       const ProfileScreen(),
     ];
