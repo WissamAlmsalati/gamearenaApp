@@ -37,36 +37,88 @@ class ProfileScreen extends StatelessWidget {
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
-                child: Column(children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration:const BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/profile.png"),
-                            fit: BoxFit.fill,
-                          ),
+                child: Center(
+                  child: Column(
+                      children: [
+                    Container(
+                      width: 100,
+                      height: 100,
+                      decoration:const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/profile.png"),
+                          fit: BoxFit.fill,
                         ),
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(userName), // Display the user's name here
-                          Text(phoneNumber),
-                        ],
-                      ),
-                    ],
-                  ),
-                  // Rest of your code...
-                ]),
+                    ),
+
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(userName), // Display the user's name here
+                        Text(phoneNumber),
+                        Text("Location")
+                      ],
+                    ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height*0.09,
+                        ),
+                        Center(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width*0.9,
+                            child: Column(
+
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween
+                                  ,
+                                  children: [
+                                    Icon(Icons.border_all),
+                                    Text("Order History"),
+                                    IconButton(onPressed: () {  }, icon: Icon(Icons.arrow_right_alt),)
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Icon(Icons.border_all),
+                                    Text("Shipping Adress"),
+                                    IconButton(onPressed: () {  }, icon: Icon(Icons.arrow_right_alt),)
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Icon(Icons.border_all),
+                                    Text("Privacy and policy"),
+                                    IconButton(onPressed: () {  }, icon: Icon(Icons.arrow_right_alt),)
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Icon(Icons.border_all),
+                                    Text("Settengs"),
+                                    IconButton(onPressed: () {  }, icon: Icon(Icons.arrow_right_alt),)
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Icon(Icons.border_all),
+                                    Text("Log Out"),
+                                    IconButton(onPressed: () {  }, icon: Icon(Icons.arrow_right_alt),)
+                                  ],
+                                )
+                              ],
+
+                            ),
+                          ),
+                        )
+                  ]),
+                ),
               ),
             ),
           );

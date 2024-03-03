@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:store/model/product_model.dart';
-import '../../view/categorys/data/data_from_firebase.dart';
 
 enum ProductStatus { loading, loaded, error }
 

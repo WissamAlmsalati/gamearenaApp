@@ -18,7 +18,7 @@ class TopDealsGrid extends StatelessWidget {
       child: BlocBuilder<ProductCubit, ProductState>(
         builder: (context, state) {
           if (state.status == ProductStatus.loading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state.status == ProductStatus.error) {
             return Center(child: Text(state.message));
           } else {
@@ -51,7 +51,7 @@ class TopDealsGrid extends StatelessWidget {
                         );
                       },
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration:const BoxDecoration(
                           color: Colors.white,
                         ),
                         child: Column(

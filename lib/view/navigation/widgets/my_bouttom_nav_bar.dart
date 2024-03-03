@@ -1,3 +1,4 @@
+import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,8 @@ class MyBouttomNavBar extends StatelessWidget {
     return BlocBuilder<NavigationcontrolCubit, NavigationcontrolState>(
       builder: (context, state) {
         return BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
           type: BottomNavigationBarType.fixed,
           currentIndex: state.index,
           onTap: (index) {
@@ -20,28 +23,28 @@ class MyBouttomNavBar extends StatelessWidget {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.home,
+                EneftyIcons.home_2_outline,
                 color: Colors.black,
               ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.search,
+                EneftyIcons.search_normal_2_outline,
                 color: Colors.black,
               ),
               label: 'Search',
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.shopping_cart,
+                EneftyIcons.shopping_cart_outline,
                 color: Colors.black,
               ),
               label: 'Cart',
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.person,
+                EneftyIcons.profile_outline,
                 color: Colors.black,
               ),
               label: 'Profile',

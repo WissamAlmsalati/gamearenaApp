@@ -5,7 +5,6 @@ import 'package:store/controler/data_mangment/get_data.dart';
 import 'package:store/model/product_model.dart';
 import 'package:store/view/categorys/widget/list_view_product_card.dart';
 
-import '../data/data_from_firebase.dart';
 import '../widget/detail_body.dart';
 
 class KeyBoardCat extends StatelessWidget {
