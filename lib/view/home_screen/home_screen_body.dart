@@ -24,7 +24,7 @@ class HomeScreenBody extends StatelessWidget {
             padding: const EdgeInsets.only(left: 15, right: 15),
             child: Column(
               children: [
-                const CoustomAppBar(),
+                const CustomAppBar(),
                 const SizedBox(
                   height: 5,
                 ),

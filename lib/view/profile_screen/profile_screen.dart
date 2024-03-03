@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../map_screen.dart';
 import '../../services/firebase_create_new_credintal_user.dart';
 import '../auth_screens/sign_in.dart';
 
@@ -34,7 +35,7 @@ class ProfileScreen extends StatelessWidget {
         } else {
           final userData = snapshot.data;
           final String userName = userData?['firstName'] ?? 'No Name';
-          final String phoneNumber=userData?['phone']??"no phone number";
+          final String phoneNumber = userData?['phone'] ?? "no phone number";
 
           return Scaffold(
             appBar: AppBar(),
@@ -42,12 +43,11 @@ class ProfileScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Center(
-                  child: Column(
-                      children: [
+                  child: Column(children: [
                     Container(
                       width: 100,
                       height: 100,
-                      decoration:const BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.red,
                         shape: BoxShape.circle,
                         image: DecorationImage(
@@ -65,93 +65,109 @@ class ProfileScreen extends StatelessWidget {
                         const Text("Location")
                       ],
                     ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height*0.09,
-                        ),
-                        Center(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width*0.9,
-                            height: MediaQuery.of(context).size.height*0.35,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.09,
+                    ),
+                    Center(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: MediaQuery.of(context).size.height * 0.35,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween
-                                  ,
-                                  children: [
-                                    const Icon(EneftyIcons.shopping_cart_outline),
-                                    const Text("Order History"),
-                                    IconButton(onPressed: () {  }, icon:  const Icon(EneftyIcons.arrow_bottom_outline),)
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Icon(EneftyIcons.location_outline),
-                                    const Text("Shipping Adress"),
-                                    IconButton(onPressed: () {  }, icon:  const Icon(EneftyIcons.arrow_bottom_outline),)
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Icon(EneftyIcons.profile_outline),
-                                    const Text("Privacy and policy"),
-                                    IconButton(onPressed: () {  }, icon: const Icon(EneftyIcons.arrow_bottom_outline),)
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Icon(EneftyIcons.setting_outline),
-                                    const Text("Settings"),
-                                    IconButton(onPressed: () {  }, icon:  const Icon(EneftyIcons.arrow_bottom_outline),)
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Icon(EneftyIcons.logout_outline),
-                                    const Text("Log Out"),
-
-
-                                    Builder(
-                                      builder: (context) => IconButton(
-                                          onPressed: () {
-                                            showCupertinoDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AlertDialog(
-                                                    title: Text("Log out"),
-                                                    content: Text("Are you sure you want to log out?"),
-                                                    actions: [
-                                                      CupertinoDialogAction(
-                                                        child: Text("Yes"),
-                                                        onPressed: () {
-                                                          UserCredit.signOut();
-                                                          Get.offAll(SignIn());
-                                                        },
-                                                      ),
-                                                      CupertinoDialogAction(
-                                                        child: Text("No"),
-                                                        onPressed: () {
-                                                          Get.back();
-                                                        },
-                                                      ),
-                                                    ],
-                                                  );
-                                                });
-                                          },
-                                          icon: Icon(EneftyIcons.arrow_bottom_outline),
-                                          color: Colors.black),
-                                    ),
-                                  ],
+                                const Icon(EneftyIcons.shopping_cart_outline),
+                                const Text("Order History"),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                      EneftyIcons.arrow_bottom_outline),
                                 )
                               ],
-
                             ),
-                          ),
-                        )
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Icon(EneftyIcons.location_outline),
+                                const Text("Shipping Adress"),
+                                IconButton(
+                                  onPressed: () {
+                                    Get.to(MapScreen());
+                                  },
+                                  icon: const Icon(
+                                      EneftyIcons.arrow_bottom_outline),
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Icon(EneftyIcons.profile_outline),
+                                const Text("Privacy and policy"),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                      EneftyIcons.arrow_bottom_outline),
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Icon(EneftyIcons.setting_outline),
+                                const Text("Settings"),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                      EneftyIcons.arrow_bottom_outline),
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Icon(EneftyIcons.logout_outline),
+                                const Text("Log Out"),
+                                Builder(
+                                  builder: (context) => IconButton(
+                                      onPressed: () {
+                                        showCupertinoDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: Text("Log out"),
+                                                content: Text(
+                                                    "Are you sure you want to log out?"),
+                                                actions: [
+                                                  CupertinoDialogAction(
+                                                    child: Text("Yes"),
+                                                    onPressed: () {
+                                                      UserCredit.signOut();
+                                                      Get.offAll(SignIn());
+                                                    },
+                                                  ),
+                                                  CupertinoDialogAction(
+                                                    child: Text("No"),
+                                                    onPressed: () {
+                                                      Get.back();
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            });
+                                      },
+                                      icon: Icon(
+                                          EneftyIcons.arrow_bottom_outline),
+                                      color: Colors.black),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    )
                   ]),
                 ),
               ),

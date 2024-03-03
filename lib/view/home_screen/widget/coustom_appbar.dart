@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:enefty_icons/enefty_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:store/view/auth_screens/sign_in.dart';
 
@@ -11,13 +10,12 @@ import '../../../Constants/images.dart';
 import '../../../services/firebase_create_new_credintal_user.dart';
 import '../../adminview/admin.dart';
 
-class CoustomAppBar extends StatelessWidget {
-  const CoustomAppBar({Key? key}) : super(key: key);
+class CustomAppBar extends StatelessWidget {
+  const CustomAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    final String userId=FirebaseAuth.instance.currentUser!.uid;
+    final String userId = FirebaseAuth.instance.currentUser!.uid;
 
     return Container(
       width: double.infinity,
@@ -36,60 +34,35 @@ class CoustomAppBar extends StatelessWidget {
           FutureBuilder(
             future: UserCredit.getUserData(userId),
             builder: (BuildContext context, AsyncSnapshot<Map<String, dynamic>?> snapshot) {
-              final String Userrole = snapshot.data?['roleAcount']?? "user";
-              return IconButton(onPressed: (){
-                if(Userrole=="admin"){
-                  Get.to(()=>AdminScreen());
-                }else if(Userrole=="user"){
-                  showDialog(context: context, builder: (context){
-                    return Container(
-                      color: Colors.red,
-                      height:  100,
-                      width: 100,
-
-                      child: Text("You are not admin"),
-                    );
-                  });
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator(); // Placeholder widget while data is being fetched
+              } else if (snapshot.hasError) {
+                // Handle the error by returning an appropriate widget
+                return Text('Error: ${snapshot.error}');
+              } else {
+                final String userRole = snapshot.data?['roleAcount'] ?? "user";
+                if (userRole == "user") {
+                  return IconButton(
+                    onPressed: () {},
+                    icon: Icon(EneftyIcons.notification_2_bold),
+                  );
+                } else if (userRole == "admin") {
+                  return IconButton(
+                    onPressed: () {
+                      Get.to(() => AdminScreen());
+                    },
+                    icon: Icon(EneftyIcons.add_bold),
+                  );
+                } else {
+                  return Container(); // Placeholder widget if user role is neither "user" nor "admin"
                 }
-              }, icon: Icon(Icons.abc));
+              }
             },
+          ),
 
-          ),
-          Builder(
-            builder: (context) => IconButton(
-                onPressed: () {
-                  showCupertinoDialog(
-                      context: context,
-                      builder: (context) {
-                        return CupertinoAlertDialog(
-                          title: Text("Log out"),
-                          content: Text("Are you sure you want to log out?"),
-                          actions: [
-                            CupertinoDialogAction(
-                              child: Text("Yes"),
-                              onPressed: () {
-                                UserCredit.signOut();
-                                Get.offAll(SignIn());
-                              },
-                            ),
-                            CupertinoDialogAction(
-                              child: Text("No"),
-                              onPressed: () {
-                                Get.back();
-                              },
-                            ),
-                          ],
-                        );
-                      });
-                },
-                icon: Icon(Icons.menu),
-                color: Colors.black),
-          ),
+        IconButton(onPressed: (){}, icon: Icon(Icons.circle_notifications),)
         ],
       ),
     );
   }
-
-  @override
-  List<Object?> get props => [];
 }
