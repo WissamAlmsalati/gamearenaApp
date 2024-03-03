@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:store/view/home_screen/widget/Item_top_deals.dart';
 import 'package:store/view/home_screen/widget/ads_container.dart';
 import 'package:store/view/home_screen/widget/category_listview.dart';
@@ -8,6 +10,7 @@ import 'package:store/view/home_screen/widget/coustom_appbar.dart';
 
 import '../../Constants/constans.dart';
 import '../../shared_widget/coustom_text_filled.dart';
+import '../search_screen/search_screen.dart';
 
 class HomeScreenBody extends StatelessWidget {
   const HomeScreenBody({Key? key}) : super(key: key);
@@ -27,10 +30,6 @@ class HomeScreenBody extends StatelessWidget {
                 const CustomAppBar(),
                 const SizedBox(
                   height: 5,
-                ),
-                CustomTextFilled(
-                  hintText: "Try Search Here",
-                  icon:const Icon(Icons.search), controller: TextEditingController(),
                 ),
                 const SizedBox(
                   height: 20,

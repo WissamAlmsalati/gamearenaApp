@@ -23,30 +23,29 @@ class AuthController {
     }
   }
 
- //void signInFun(emailController, passwordController) async {
- //  bool validfun = validatefildes(emailController, passwordController);
- //  if (validfun == true) {
- //    try {
- //      bool signInSuccessful = await UserFirebaseAuth()
- //          .SignInFun(emailController.text, passwordController.text);
- //      if (signInSuccessful) {
- //        Get.to(() => NavigationControl());
- //      } else {
- //        Get.snackbar(
- //          'ops!', // title
- //          'You dont have account', // message
- //          snackPosition: SnackPosition.TOP,
- //        );
- //      }
- //    } catch (e) {
- //      Get.snackbar(
- //        'Error', // title
- //        e.toString(), // message
- //        snackPosition: SnackPosition.TOP,
- //      );
- //    }
- //  }
- //}
+ void signInFun(emailController, passwordController) async {
+  bool validfun = validatefildes(emailController, passwordController);
+  if (validfun == true) {
+    try {
+      bool signInSuccessful = await UserCredit.signInFun(emailController.text, passwordController.text);
+      if (signInSuccessful) {
+        Get.to(() => NavigationControl());
+      } else {
+        Get.snackbar(
+          'ops!', // title
+          'You dont have account', // message
+          snackPosition: SnackPosition.TOP,
+        );
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error', // title
+        e.toString(), // message
+        snackPosition: SnackPosition.TOP,
+      );
+    }
+  }
+}
 
   bool validatefildes(emailController, passwordController) {
     if (emailController.text.isEmpty || passwordController.text.isEmpty) {

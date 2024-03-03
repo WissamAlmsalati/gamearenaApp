@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
+import 'package:random_avatar/random_avatar.dart';
 import '../../map_screen.dart';
 import '../../services/firebase_create_new_credintal_user.dart';
 import '../auth_screens/sign_in.dart';
@@ -44,18 +44,10 @@ class ProfileScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Center(
                   child: Column(children: [
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: const BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/profile.png"),
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ),
+                  CircleAvatar(
+  radius: 50,
+  backgroundImage: NetworkImage('https://source.unsplash.com/random'),
+),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -23,9 +23,9 @@ class TopDealsGrid extends StatelessWidget {
             return Center(child: Text(state.message));
           } else {
             if (state.products.isEmpty) {
-              return Center(child: Text('No data available'));
+              return const Center(child: Text('No data available'));
             } else {
-              return Container(
+              return SizedBox(
                 height: 1000,
                 width: MediaQuery.of(context).size.width,
                 child: GridView.builder(
@@ -33,7 +33,7 @@ class TopDealsGrid extends StatelessWidget {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 2,
-                    mainAxisExtent: 200,
+                    mainAxisExtent: 209,
                     mainAxisSpacing: 2,
                   ),
                   itemCount: state.products.length,

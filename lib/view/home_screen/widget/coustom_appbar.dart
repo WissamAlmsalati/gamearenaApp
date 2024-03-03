@@ -15,7 +15,8 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String userId = FirebaseAuth.instance.currentUser!.uid;
+    final User? user = FirebaseAuth.instance.currentUser;
+    final String userId = user != null ? user.uid : '';
 
     return Container(
       width: double.infinity,
