@@ -10,7 +10,6 @@ class EmailSender {
   static Future<void> sendOrderEmail(
       String recipientEmail,
       List<ProductModel> productList,
-      String otp,
       ) async {
     // Create an SMTP client configuration
     final smtpServer = gmail('ststoremail9@gmail.com', 'rrlr oqcm hcmk rmsr');

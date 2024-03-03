@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:store/view/detail_product_screen/detail_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   SearchScreen({Key? key}) : super(key: key);
@@ -49,16 +52,46 @@ class _SearchScreenState extends State<SearchScreen> {
                   } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                     return Center(child: Text('No results found'));
                   } else {
-                    return ListView(
-  children: snapshot.data!.docs.map((DocumentSnapshot document) {
-    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-    return ListTile(
-      leading: Image.network(data['productImage']),
-      title: Text(data['productName']),
-      subtitle: Text(data['productDescription']),
-    );
-  }).toList(),
-);
+                    return Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      child: ListView(
+                        children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                          return GestureDetector(
+                            onTap: (){
+                              Get.to(() => DetailScreen(
+  title: data['productName'],
+  image: data['productImage'],
+  price: data['productPrice'],
+  description: data['productDescription'],
+));
+                            },
+                            child: Container(
+                              height: 100,
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+
+                                        child: Image.network(data['productImage'])),
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(data['productName']),
+                                      Text(data['productDescription']),
+                                    ],
+                                  ),
+                                ],
+                              ),
+
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    );
                   }
                 },
               ),

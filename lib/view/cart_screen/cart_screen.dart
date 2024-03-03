@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/view/cart_screen/widget/cart_items.dart';
@@ -49,106 +50,21 @@ class CartScreen extends StatelessWidget {
                 color: Colors.black,
                 child: Row(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(left: 20),
-                      height: 50,
-                      width: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child:BlocBuilder<CartCubit,bool>(
-                          builder: (BuildContext context, bool state) =>
-                              ElevatedButton(
-                                onPressed: () async{
-                                  TextEditingController otpController = TextEditingController();
-                                  showDialog(context: context, builder: (context) => AlertDialog(
-                                    title: const Text("Order"),
-                                    content: const Text("Your Order has been sent"),
-                                    actions: [
-                                     Column(
-                                    children: [
-                                    TextFormField(
-                                    controller: otpController,
-                                    keyboardType: TextInputType.number,
-                                    maxLength: 4,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      labelText: 'Enter OTP',
-                                    ),
-                                  ),
-                                  ElevatedButton(
-  onPressed: () async {
-    // Generate the OTP
-    String generatedOTP = await EmailSender.generateOTP();
+                    Center(
+                      child:BlocBuilder<CartCubit,bool>(
+                        builder: (BuildContext context, bool state) =>
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: CupertinoButton(
+                                color: Colors.white,
+                                  child: Text("Order",style: TextStyle(color: Colors.black),), onPressed: ()async{
+                                context.read<CartCubit>().clearCart();
 
-    // Show the dialog
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Order"),
-        content: const Text("Your Order has been sent"),
-        actions: [
-          Column(
-            children: [
-              TextFormField(
-                controller: otpController,
-                keyboardType: TextInputType.number,
-                maxLength: 4,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Enter OTP',
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (otpController.text == generatedOTP) {
-                    Navigator.pop(context);
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Invalid OTP'),
-                      ),
-                    );
-                  }
-                },
-                child: const Text('Submit'),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+                                await EmailSender.sendOrderEmail(userEmail, CartList.cart );
 
-    // Send the order email with the generated OTP
-    await EmailSender.sendOrderEmail(userEmail, CartList.cart, generatedOTP);
-  },
-  child: const Text('Order'),
-),
-                                    ],
-                                     )
-                                    ],
-                                  ));
-                                  try{
-                                    EmailSender.sendOrderEmail(userEmail , CartList.cart, otpController.text);
-                                    context.read<CartCubit>().clearCart();
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text('Order Sent'),
-                                      ),
-                                    );
-                                  }catch(e){
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text('Error:'),
-                                      ),
-                                    );
-                                  }
-                                },
-                                child:  Text(userEmail),
-                              )
-                        ),
+                              }),
+                            )
+
                       ),
                     ),
                     const Spacer(),
