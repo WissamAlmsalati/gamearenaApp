@@ -1,3 +1,4 @@
+import 'package:enefty_icons/enefty_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
       future: UserCredit.getUserData(userId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),
@@ -52,14 +53,13 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(userName), // Display the user's name here
                         Text(phoneNumber),
-                        Text("Location")
+                        const Text("Location")
                       ],
                     ),
                         SizedBox(
@@ -68,48 +68,51 @@ class ProfileScreen extends StatelessWidget {
                         Center(
                           child: Container(
                             width: MediaQuery.of(context).size.width*0.9,
+                            height: MediaQuery.of(context).size.height*0.35,
                             child: Column(
-
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween
                                   ,
                                   children: [
-                                    Icon(Icons.border_all),
-                                    Text("Order History"),
-                                    IconButton(onPressed: () {  }, icon: Icon(Icons.arrow_right_alt),)
+                                    const Icon(EneftyIcons.shopping_cart_outline),
+                                    const Text("Order History"),
+                                    IconButton(onPressed: () {  }, icon:  const Icon(EneftyIcons.arrow_bottom_outline),)
                                   ],
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Icon(Icons.border_all),
-                                    Text("Shipping Adress"),
-                                    IconButton(onPressed: () {  }, icon: Icon(Icons.arrow_right_alt),)
+                                    const Icon(EneftyIcons.location_outline),
+                                    const Text("Shipping Adress"),
+                                    IconButton(onPressed: () {  }, icon:  const Icon(EneftyIcons.arrow_bottom_outline),)
                                   ],
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Icon(Icons.border_all),
-                                    Text("Privacy and policy"),
-                                    IconButton(onPressed: () {  }, icon: Icon(Icons.arrow_right_alt),)
+                                    const Icon(EneftyIcons.profile_outline),
+                                    const Text("Privacy and policy"),
+                                    IconButton(onPressed: () {  }, icon: const Icon(EneftyIcons.arrow_bottom_outline),)
                                   ],
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Icon(Icons.border_all),
-                                    Text("Settengs"),
-                                    IconButton(onPressed: () {  }, icon: Icon(Icons.arrow_right_alt),)
+                                    const Icon(EneftyIcons.setting_outline),
+                                    const Text("Settengs"),
+                                    IconButton(onPressed: () {  }, icon:  const Icon(EneftyIcons.arrow_bottom_outline),)
                                   ],
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Icon(Icons.border_all),
-                                    Text("Log Out"),
-                                    IconButton(onPressed: () {  }, icon: Icon(Icons.arrow_right_alt),)
+                                    const Icon(EneftyIcons.logout_outline),
+                                    const Text("Log Out"),
+                                    IconButton(onPressed: () {
+
+                                    }, icon: const Icon(EneftyIcons.arrow_bottom_outline),)
                                   ],
                                 )
                               ],
