@@ -3,8 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../services/firebase_create_new_credintal_user.dart';
+import '../auth_screens/sign_in.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -101,7 +104,7 @@ class ProfileScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Icon(EneftyIcons.setting_outline),
-                                    const Text("Settengs"),
+                                    const Text("Settings"),
                                     IconButton(onPressed: () {  }, icon:  const Icon(EneftyIcons.arrow_bottom_outline),)
                                   ],
                                 ),
@@ -110,9 +113,38 @@ class ProfileScreen extends StatelessWidget {
                                   children: [
                                     const Icon(EneftyIcons.logout_outline),
                                     const Text("Log Out"),
-                                    IconButton(onPressed: () {
 
-                                    }, icon: const Icon(EneftyIcons.arrow_bottom_outline),)
+
+                                    Builder(
+                                      builder: (context) => IconButton(
+                                          onPressed: () {
+                                            showCupertinoDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    title: Text("Log out"),
+                                                    content: Text("Are you sure you want to log out?"),
+                                                    actions: [
+                                                      CupertinoDialogAction(
+                                                        child: Text("Yes"),
+                                                        onPressed: () {
+                                                          UserCredit.signOut();
+                                                          Get.offAll(SignIn());
+                                                        },
+                                                      ),
+                                                      CupertinoDialogAction(
+                                                        child: Text("No"),
+                                                        onPressed: () {
+                                                          Get.back();
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                });
+                                          },
+                                          icon: Icon(EneftyIcons.arrow_bottom_outline),
+                                          color: Colors.black),
+                                    ),
                                   ],
                                 )
                               ],
