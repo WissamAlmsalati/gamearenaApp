@@ -60,10 +60,17 @@ class SignUp extends StatelessWidget {
                   hintText: "Password",
                   icon: Icons.lock,
                 ),
-                Row(
-                  children: [
-                    Text("I agree to the terms and conditions"),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: const Row(
+                    children: [
+                      Text("I agree to the terms and conditions"),
+                      Checkbox(
+                        value: true,
+                        onChanged: null,
+                      )
+                    ],
+                  ),
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(

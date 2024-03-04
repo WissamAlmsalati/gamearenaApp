@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:store/firebase_options.dart';
 import 'package:store/services/firebase_create_new_credintal_user.dart';
 import 'package:store/view/auth_screens/sign_up.dart';
+import 'MyThemeData.dart';
 import 'view/navigation/navigation_control.dart';
 
 
@@ -36,10 +37,7 @@ class MyApp extends StatelessWidget {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
-              useMaterial3: true,
-            ),
+            theme:MyTheme,
             home: user == null ? SignUp() : NavigationControl(),
           );
         } else {

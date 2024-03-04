@@ -33,32 +33,41 @@ class _AddProductScreenState extends State<AddProductScreen> {
     });
   }
 
-  Future<void> _submit() async {
-    if (_formKey.currentState!.validate() && _imageFile != null && _selectedCategory != null) {
-      _formKey.currentState!.save();
-      try {
-        String imageUrl = await AdminAddProduct.uploadImageToFirebase(_imageFile!);
-        await AdminAddProduct.addProductToCollection(
-          _selectedCategory!,
-          _productName!,
-          _productPrice!,
-          _productDescription!,
-          imageUrl,
-        );
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Product added successfully.'),
-          ),
-        );
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error adding product: $e'),
-          ),
-        );
-      }
+Future<void> _submit() async {
+  if (_formKey.currentState!.validate() && _imageFile != null && _selectedCategory != null) {
+    _formKey.currentState!.save();
+    try {
+      String imageUrl = await AdminAddProduct.uploadImageToFirebase(_imageFile!);
+      // Add to the selected category collection
+      await AdminAddProduct.addProductToCollection(
+        _selectedCategory!,
+        _productName!,
+        _productPrice!,
+        _productDescription!,
+        imageUrl,
+      );
+      // Add to the 'AllProducts' collection
+      await AdminAddProduct.addProductToCollection(
+        'AllProducts',
+        _productName!,
+        _productPrice!,
+        _productDescription!,
+        imageUrl,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Product added successfully.'),
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error adding product: $e'),
+        ),
+      );
     }
   }
+}
 
   @override
   Widget build(BuildContext context) {

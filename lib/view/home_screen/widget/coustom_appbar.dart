@@ -36,23 +36,18 @@ class CustomAppBar extends StatelessWidget {
             future: UserCredit.getUserData(userId),
             builder: (BuildContext context, AsyncSnapshot<Map<String, dynamic>?> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator(); // Placeholder widget while data is being fetched
+                return SizedBox();
               } else if (snapshot.hasError) {
                 // Handle the error by returning an appropriate widget
                 return Text('Error: ${snapshot.error}');
               } else {
                 final String userRole = snapshot.data?['roleAcount'] ?? "user";
-                if (userRole == "user") {
-                  return IconButton(
-                    onPressed: () {},
-                    icon: Icon(EneftyIcons.notification_2_bold),
-                  );
-                } else if (userRole == "admin") {
+                  if (userRole == "admin") {
                   return IconButton(
                     onPressed: () {
                       Get.to(() => AdminScreen());
                     },
-                    icon: Icon(EneftyIcons.add_bold),
+                    icon: Icon(EneftyIcons.shop_add_outline),
                   );
                 } else {
                   return Container(); // Placeholder widget if user role is neither "user" nor "admin"
@@ -61,9 +56,13 @@ class CustomAppBar extends StatelessWidget {
             },
           ),
 
-        IconButton(onPressed: (){}, icon: Icon(Icons.circle_notifications),)
+        IconButton(onPressed: (){}, icon: Icon(EneftyIcons.notification_outline),)
         ],
       ),
     );
   }
+
+
+
+
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:store/view/detail_product_screen/detail_screen.dart';
 import '../../../controler/data_mangment/get_data.dart';
+import '../../../shimmer_loding.dart';
 
 class TopDealsGrid extends StatelessWidget {
   const TopDealsGrid({Key? key}) : super(key: key);
@@ -18,7 +20,24 @@ class TopDealsGrid extends StatelessWidget {
       child: BlocBuilder<ProductCubit, ProductState>(
         builder: (context, state) {
           if (state.status == ProductStatus.loading) {
-            return const Center(child: CircularProgressIndicator());
+            return SizedBox(
+height: 1045,
+              width: MediaQuery.of(context).size.width,
+              child: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 2,
+                  mainAxisExtent: 209,
+                  mainAxisSpacing: 2,
+                ),
+                itemCount: 6,
+                itemBuilder: (context, index) {
+                  return ShimmerBox();
+                },
+              ),
+            );
+
           } else if (state.status == ProductStatus.error) {
             return Center(child: Text(state.message));
           } else {
@@ -26,7 +45,7 @@ class TopDealsGrid extends StatelessWidget {
               return const Center(child: Text('No data available'));
             } else {
               return SizedBox(
-                height: 1000,
+                height: 1045,
                 width: MediaQuery.of(context).size.width,
                 child: GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
@@ -47,7 +66,6 @@ class TopDealsGrid extends StatelessWidget {
                               price: product.productPrice.toString(),
                               description: product.productDescription,
                             )
-
                         );
                       },
                       child: Container(

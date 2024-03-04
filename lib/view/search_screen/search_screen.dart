@@ -30,12 +30,19 @@ class _SearchScreenState extends State<SearchScreen> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: TextField(
+
                 controller: searchController,
                 onSubmitted: (value) async {
                   await performSearch();
                   setState(() {});
                 },
                 decoration: InputDecoration(
+                  fillColor: Colors.grey[300],
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
                   hintText: 'Search...',
                   prefixIcon: Icon(Icons.search),
                 ),

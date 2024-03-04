@@ -3,12 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:store/view/home_screen/widget/Item_top_deals.dart';
 import 'package:store/view/home_screen/widget/ads_container.dart';
 import 'package:store/view/home_screen/widget/category_listview.dart';
 import 'package:store/view/home_screen/widget/coustom_appbar.dart';
 
 import '../../Constants/constans.dart';
+import '../../MyThemeData.dart';
 import '../../shared_widget/coustom_text_filled.dart';
 import '../search_screen/search_screen.dart';
 
@@ -18,7 +20,6 @@ class HomeScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-
     AppDimension appDimension = AppDimension(context);
     return Scaffold(
       body: SafeArea(
@@ -28,28 +29,42 @@ class HomeScreenBody extends StatelessWidget {
             child: Column(
               children: [
                 const CustomAppBar(),
-                const SizedBox(
-                  height: 5,
+                SizedBox(
+                  height: appDimension.height * 0.01,
                 ),
-                const SizedBox(
-                  height: 20,
+                const AdsContainer(),
+                SizedBox(
+                  height: appDimension.height * 0.023,
                 ),
-                AdsContainer(),
-                const SizedBox(
-                  height: 20,
+
+                 Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text("Categories",style:TextStyle(
+                      fontFamily: GoogleFonts.rubik().fontFamily,
+                      fontSize: 16
+                    ) ,)),
+                SizedBox(
+                  height:appDimension.height * 0.01 ,
                 ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                    child: Text("Categories",)),
-                CustomListView(),
-                const SizedBox(
-                  height: 20,
+                const CustomListView(),
+                 SizedBox(
+                  height:appDimension.height * 0.01 ,
                 ),
                 Row(
                   children: [
-                    Text("Top Deals",),
+                    Text(
+                      "Top Deals",
+                        style:TextStyle(
+                            fontFamily: GoogleFonts.rubik().fontFamily,
+                            fontSize: 16,
+                        ),
+                    ),
                     const Spacer(),
-                    TextButton(onPressed: (){}, child: Text("View All"))
+                    TextButton(onPressed: () {}, child: Text("View All"
+                    ,style:TextStyle(
+                            fontFamily: GoogleFonts.rubik().fontFamily,
+                            fontSize: 16
+                        )))
                   ],
                 ),
                 TopDealsGrid(),
