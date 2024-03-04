@@ -56,6 +56,7 @@ class HomeScreenBody extends StatelessWidget {
                       "Top Deals",
                         style:TextStyle(
                             fontFamily: GoogleFonts.rubik().fontFamily,
+
                             fontSize: 16,
                         ),
                     ),
@@ -63,6 +64,7 @@ class HomeScreenBody extends StatelessWidget {
                     TextButton(onPressed: () {}, child: Text("View All"
                     ,style:TextStyle(
                             fontFamily: GoogleFonts.rubik().fontFamily,
+                            color:Colors.yellow[800],
                             fontSize: 16
                         )))
                   ],

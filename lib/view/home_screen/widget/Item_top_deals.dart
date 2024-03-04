@@ -21,7 +21,7 @@ class TopDealsGrid extends StatelessWidget {
         builder: (context, state) {
           if (state.status == ProductStatus.loading) {
             return SizedBox(
-height: 1045,
+              height: 1045,
               width: MediaQuery.of(context).size.width,
               child: GridView.builder(
                 physics: const NeverScrollableScrollPhysics(),
@@ -37,7 +37,6 @@ height: 1045,
                 },
               ),
             );
-
           } else if (state.status == ProductStatus.error) {
             return Center(child: Text(state.message));
           } else {
@@ -65,11 +64,10 @@ height: 1045,
                               image: product.productImage,
                               price: product.productPrice.toString(),
                               description: product.productDescription,
-                            )
-                        );
+                            ));
                       },
                       child: Container(
-                        decoration:const BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                         ),
                         child: Column(

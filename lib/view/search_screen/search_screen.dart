@@ -60,43 +60,55 @@ class _SearchScreenState extends State<SearchScreen> {
                     return Center(child: Text('No results found'));
                   } else {
                     return Container(
+                      color: Colors.grey[300],
                       height: MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width,
-                      child: ListView(
-                        children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-                          return GestureDetector(
-                            onTap: (){
-                              Get.to(() => DetailScreen(
-  title: data['productName'],
-  image: data['productImage'],
-  price: data['productPrice'],
-  description: data['productDescription'],
-));
-                            },
-                            child: Container(
-                              height: 100,
-                              width: MediaQuery.of(context).size.width,
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-
-                                        child: Image.network(data['productImage'])),
-                                  ),
-                                  Column(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          color: Colors.green,
+                          margin: const EdgeInsets.all(8.0),
+                          child: ListView(
+                            children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                              Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                              return GestureDetector(
+                                onTap: (){
+                                  Get.to(() => DetailScreen(
+                                                          title: data['productName'],
+                                                          image: data['productImage'],
+                                                          price: data['productPrice'],
+                                                          description: data['productDescription'],
+                                                        ));
+                                },
+                                child: Container(
+                                  height: 100,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Text(data['productName']),
-                                      Text(data['productDescription']),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+
+                                            child: Image.network(data['productImage'])),
+                                      ),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(data['productName']),
+                                          Text(data['productDescription']),
+                                        ],
+                                      ),
                                     ],
                                   ),
-                                ],
-                              ),
 
-                            ),
-                          );
-                        }).toList(),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
                       ),
                     );
                   }

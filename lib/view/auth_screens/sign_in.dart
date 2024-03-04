@@ -26,83 +26,85 @@ class SignIn extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: Column(
-            children: [
-              Image.asset(Images.textLogo),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
-              ),
-              AuthTextFilled(
-                controller: emailController,
-                hintText: "Email",
-                icon: Icons.email,
-              ),
-              AuthTextFilled(
-                controller: passwordController,
-                hintText: "Password",
-                icon: Icons.lock,
-              ),
-              Row(
-                children: [
-                  Checkbox(
-                    value: false,
-                    onChanged: (bool? newValue) {
-                      newValue = newValue!;
-                    },
-                  ),
-                  Text("Remember me"),
-                ],
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize:
-                      Size(MediaQuery.of(context).size.width * 0.9, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: Column(
+              children: [
+                Image.asset(Images.textLogo),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
                 ),
-                onPressed: () async {
-                  if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-                    bool signInSuccess = await UserCredit.signInFun(
-                      emailController.text,
-                      passwordController.text,
-                    );
-
-                    if (signInSuccess) {
-                      print('User signed in successfully');
-                      Get.to(() => NavigationControl());
-                      // Navigate to the next screen
-                    } else {
-                      print('Sign in failed');
-                    }
-                  } else {
-                    print('Email or password field is empty');
-                  }
-                },
-
-                child: Text("Sign In"),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Don't have an account?"),
-                  TextButton(
-                    onPressed: () {
-                      Get.to(() => SignUp());
-                    },
-                    child: Text("Sign Up"),
+                AuthTextFilled(
+                  controller: emailController,
+                  hintText: "Email",
+                  icon: Icons.email,
+                ),
+                AuthTextFilled(
+                  controller: passwordController,
+                  hintText: "Password",
+                  icon: Icons.lock,
+                ),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: false,
+                      onChanged: (bool? newValue) {
+                        newValue = newValue!;
+                      },
+                    ),
+                    Text("Remember me"),
+                  ],
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize:
+                        Size(MediaQuery.of(context).size.width * 0.9, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
-                ],
-              ),
-            ],
+                  onPressed: () async {
+                    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+                      bool signInSuccess = await UserCredit.signInFun(
+                        emailController.text,
+                        passwordController.text,
+                      );
+          
+                      if (signInSuccess) {
+                        print('User signed in successfully');
+                        Get.to(() => NavigationControl());
+                        // Navigate to the next screen
+                      } else {
+                        print('Sign in failed');
+                      }
+                    } else {
+                      print('Email or password field is empty');
+                    }
+                  },
+          
+                  child: Text("Sign In"),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don't have an account?"),
+                    TextButton(
+                      onPressed: () {
+                        Get.to(() => SignUp());
+                      },
+                      child: Text("Sign Up"),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

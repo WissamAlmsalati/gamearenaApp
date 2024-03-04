@@ -20,32 +20,32 @@ class MyBouttomNavBar extends StatelessWidget {
           onTap: (index) {
             context.read<NavigationcontrolCubit>().changeIndex(index);
           },
-          items: const [
+          items:  [
             BottomNavigationBarItem(
               icon: Icon(
                 EneftyIcons.home_2_outline,
-                color: Colors.black,
+                color: state.index == 0 ? Colors.yellow[800] : Colors.black,
               ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 EneftyIcons.search_normal_2_outline,
-                color: Colors.black,
+                color: state.index == 1 ? Colors.yellow[800] : Colors.black,
               ),
               label: 'Search',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 EneftyIcons.shopping_cart_outline,
-                color: Colors.black,
+                color: state.index == 2 ? Colors.yellow[800] : Colors.black,
               ),
               label: 'Cart',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 EneftyIcons.profile_outline,
-                color: Colors.black,
+                color: state.index == 3 ? Colors.yellow[800] : Colors.black,
               ),
               label: 'Profile',
             ),
