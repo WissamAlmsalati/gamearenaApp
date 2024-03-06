@@ -14,7 +14,7 @@ class AuthTextFilled extends StatelessWidget {
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.07,
         width: MediaQuery.of(context).size.width * 0.9,
-        child: TextField(
+        child: TextFormField(
           controller: controller,
           decoration: InputDecoration(
             fillColor: Colors.grey[300],

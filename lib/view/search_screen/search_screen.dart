@@ -30,7 +30,6 @@ class _SearchScreenState extends State<SearchScreen> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: TextField(
-
                 controller: searchController,
                 onSubmitted: (value) async {
                   await performSearch();
@@ -51,7 +50,8 @@ class _SearchScreenState extends State<SearchScreen> {
             Expanded(
               child: FutureBuilder<QuerySnapshot>(
                 future: performSearch(),
-                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
@@ -69,33 +69,39 @@ class _SearchScreenState extends State<SearchScreen> {
                           color: Colors.green,
                           margin: const EdgeInsets.all(8.0),
                           child: ListView(
-                            children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                              Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                            children: snapshot.data!.docs
+                                .map((DocumentSnapshot document) {
+                              Map<String, dynamic> data =
+                                  document.data() as Map<String, dynamic>;
                               return GestureDetector(
-                                onTap: (){
+                                onTap: () {
                                   Get.to(() => DetailScreen(
-                                                          title: data['productName'],
-                                                          image: data['productImage'],
-                                                          price: data['productPrice'],
-                                                          description: data['productDescription'],
-                                                        ));
+                                        title: data['productName'],
+                                        image: data['productImage'],
+                                        price: data['productPrice'],
+                                        description: data['productDescription'],
+                                      ));
                                 },
                                 child: Container(
                                   height: 100,
                                   width: MediaQuery.of(context).size.width,
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Container(
-
-                                            child: Image.network(data['productImage'])),
+                                            child: Image.network(
+                                                data['productImage'])),
                                       ),
                                       Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(data['productName']),
                                           Text(data['productDescription']),
@@ -103,7 +109,6 @@ class _SearchScreenState extends State<SearchScreen> {
                                       ),
                                     ],
                                   ),
-
                                 ),
                               );
                             }).toList(),
