@@ -2,14 +2,12 @@ import 'package:get/get.dart';
 import 'package:store/view/navigation/navigation_control.dart';
 
 import '../../../services/firebase_create_new_credintal_user.dart';
-
 class AuthController {
-
-  void signUpFun(emailController, passwordController,firstnameCnotroler,lastnameControler,phoneControler) {
+  Future<void> signUpFun(emailController, passwordController,firstnameCnotroler,lastnameControler,phoneControler) async {
     bool validfun = validatefildes(emailController, passwordController);
     if (validfun == true) {
       try {
-        UserCredit.signUpAndCreateDocument(
+        await UserCredit.signUpAndCreateDocument(
             emailController.text, passwordController.text,firstnameCnotroler.text,lastnameControler.text,phoneControler.text,'user');
         print("user created");
         Get.to(() => NavigationControl());
@@ -22,6 +20,7 @@ class AuthController {
       }
     }
   }
+}
 
  void signInFun(emailController, passwordController) async {
   bool validfun = validatefildes(emailController, passwordController);
@@ -59,4 +58,4 @@ class AuthController {
       return true;
     }
   }
-}
+

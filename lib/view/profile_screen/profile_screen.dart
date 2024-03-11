@@ -2,17 +2,14 @@ import 'package:enefty_icons/enefty_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:random_avatar/random_avatar.dart';
 import '../../map_screen.dart';
 import '../../services/firebase_create_new_credintal_user.dart';
 import '../auth_screens/sign_in.dart';
+import 'widgets/user_info.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final String userId = FirebaseAuth.instance.currentUser!.uid;
@@ -41,27 +38,18 @@ class ProfileScreen extends StatelessWidget {
             appBar: AppBar(),
             body: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10),
+                padding:  const EdgeInsets.only(left: 10, right: 10),
                 child: Center(
                   child: Column(children: [
-                  CircleAvatar(
-  radius: 50,
-  backgroundImage: NetworkImage('https://source.unsplash.com/random'),
-),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(userName), // Display the user's name here
-                        Text(phoneNumber),
-                        const Text("Location")
-                      ],
+                    UserInfoView(
+                      userName: userName,
+                      phoneNumber: phoneNumber,
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.09,
                     ),
                     Center(
-                      child: Container(
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.8,
                         height: MediaQuery.of(context).size.height * 0.35,
                         child: Column(
@@ -86,7 +74,7 @@ class ProfileScreen extends StatelessWidget {
                                 const Text("Shipping Adress"),
                                 IconButton(
                                   onPressed: () {
-                                    Get.to(MapScreen());
+                                    Get.to(const MapScreen());
                                   },
                                   icon: const Icon(
                                       EneftyIcons.arrow_bottom_outline),
@@ -129,19 +117,19 @@ class ProfileScreen extends StatelessWidget {
                                             context: context,
                                             builder: (context) {
                                               return AlertDialog(
-                                                title: Text("Log out"),
-                                                content: Text(
+                                                title: const Text("Log out"),
+                                                content: const Text(
                                                     "Are you sure you want to log out?"),
                                                 actions: [
                                                   CupertinoDialogAction(
-                                                    child: Text("Yes"),
+                                                    child: const Text("Yes"),
                                                     onPressed: () {
                                                       UserCredit.signOut();
-                                                      Get.offAll(SignIn());
+                                                      Get.offAll(const SignIn());
                                                     },
                                                   ),
                                                   CupertinoDialogAction(
-                                                    child: Text("No"),
+                                                    child: const Text("No"),
                                                     onPressed: () {
                                                       Get.back();
                                                     },
@@ -150,7 +138,7 @@ class ProfileScreen extends StatelessWidget {
                                               );
                                             });
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                           EneftyIcons.arrow_bottom_outline),
                                       color: Colors.black),
                                 ),
