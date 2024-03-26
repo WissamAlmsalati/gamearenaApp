@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:store/view/navigation/navigation_control.dart';
 
@@ -22,18 +24,36 @@ class AuthController {
   }
 }
 
- void signInFun(emailController, passwordController) async {
+void signInFun(emailController, passwordController) async {
   bool validfun = validatefildes(emailController, passwordController);
   if (validfun == true) {
     try {
-      bool signInSuccessful = await UserCredit.signInFun(emailController.text, passwordController.text);
-      if (signInSuccessful) {
-        Get.to(() => NavigationControl());
+      bool isEmailNew = await UserCreditTest.isEmailNew(emailController.text);
+      if (!isEmailNew) {
+        bool signInSuccessful = await UserCredit.signInFun(emailController.text, passwordController.text);
+        if (signInSuccessful) {
+          Get.to(() => NavigationControl());
+        } else {
+          Get.snackbar(
+            'ops!', // title
+            'You dont have account', // message
+            snackPosition: SnackPosition.TOP,
+          );
+        }
       } else {
-        Get.snackbar(
-          'ops!', // title
-          'You dont have account', // message
-          snackPosition: SnackPosition.TOP,
+        Get.dialog(
+          AlertDialog(
+            title: Text('Error'),
+            content: Text('This email is not registered.'),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Get.back();
+                },
+              ),
+            ],
+          ),
         );
       }
     } catch (e) {
@@ -46,16 +66,23 @@ class AuthController {
   }
 }
 
-  bool validatefildes(emailController, passwordController) {
-    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-      Get.snackbar(
-        'Error', // title
-        'Please fill all the fildes', // message
-        snackPosition: SnackPosition.TOP,
-      );
-      return false;
-    } else {
-      return true;
-    }
+bool validatefildes(emailController, passwordController) {
+  if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+    Get.snackbar(
+      'Error', // title
+      'Please fill all the fildes', // message
+      snackPosition: SnackPosition.TOP,
+    );
+    return false;
+  } else {
+    return true;
   }
+}
 
+class UserCreditTest {
+  static Future<bool> isEmailNew(String email) async {
+    final users = FirebaseFirestore.instance.collection('users');
+    final querySnapshot = await users.where('email', isEqualTo: email).get();
+    return querySnapshot.docs.isEmpty;
+  }
+}

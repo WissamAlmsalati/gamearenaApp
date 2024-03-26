@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:store/firebase_options.dart';
 import 'package:store/services/firebase_create_new_credintal_user.dart';
-import 'package:store/view/auth_screens/sign_up.dart';
+import 'package:store/view/auth_screens/screens/sign_up.dart';
 import 'MyThemeData.dart';
 import 'view/navigation/navigation_control.dart';
 
@@ -38,10 +38,10 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme:MyTheme,
-            home: user == null ? SignUp() : NavigationControl(),
+            home: user == null ? SignUp() : const NavigationControl(),
           );
         } else {
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),

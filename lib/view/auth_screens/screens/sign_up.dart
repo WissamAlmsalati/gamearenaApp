@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../Constants/images.dart';
-import '../../services/firebase_create_new_credintal_user.dart';
-import '../navigation/navigation_control.dart';
-import '../auth_screens/methode/validate_filds.dart';
-import '../auth_screens/sign_in.dart';
-import '../auth_screens/widgets/auth_text_filed.dart';
+import '../../../Constants/images.dart';
+import '../../../services/firebase_create_new_credintal_user.dart';
+import '../../navigation/navigation_control.dart';
+import '../methode/validate_filds.dart';
+import '../widgets/terms_and_conditionsr.dart';
+import 'sign_in.dart';
+import '../widgets/auth_text_filed.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class SignUp extends StatelessWidget {
@@ -16,18 +17,23 @@ class SignUp extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   SignUp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10),
           child: SingleChildScrollView(
             child: Form(
+              key: _formKey,
               child: Column(
                 children: [
                   Image.asset(Images.textLogo),
@@ -38,6 +44,7 @@ class SignUp extends StatelessWidget {
                     controller: firstNameController,
                     hintText: "First name",
                     icon: Icons.person,
+
                   ),
                   AuthTextFilled(
                     controller: lastNameController,
@@ -63,7 +70,7 @@ class SignUp extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Row(
                       children: [
-                        Text("I agree to the terms and conditions"),
+                        termsAndConditionsText(context),
                         Checkbox(
                           value: true,
                           onChanged: null,
@@ -80,11 +87,7 @@ class SignUp extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      if (emailController.text.isNotEmpty &&
-                          passwordController.text.isNotEmpty &&
-                          firstNameController.text.isNotEmpty &&
-                          lastNameController.text.isNotEmpty &&
-                          phoneNumberController.text.isNotEmpty) {
+                      if (_formKey.currentState!.validate()) {
                         authController.signUpFun(
                           emailController,
                           passwordController,
@@ -93,7 +96,7 @@ class SignUp extends StatelessWidget {
                           phoneNumberController,
                         );
                       } else {
-                        print('One or more fields are empty');
+                        print('One or more fields are invalid');
                       }
                     },
                     child: Text("Sign Up"),

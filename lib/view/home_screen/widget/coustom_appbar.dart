@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:store/view/auth_screens/sign_in.dart';
+import 'package:store/view/auth_screens/screens/sign_in.dart';
 
 import '../../../Constants/images.dart';
 import '../../../services/firebase_create_new_credintal_user.dart';

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../map_screen.dart';
 import '../../services/firebase_create_new_credintal_user.dart';
-import '../auth_screens/sign_in.dart';
+import '../auth_screens/screens/sign_in.dart';
 import 'widgets/user_info.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -125,7 +125,7 @@ class ProfileScreen extends StatelessWidget {
                                                     child: const Text("Yes"),
                                                     onPressed: () {
                                                       UserCredit.signOut();
-                                                      Get.offAll(const SignIn());
+                                                      Get.offAll( SignIn());
                                                     },
                                                   ),
                                                   CupertinoDialogAction(

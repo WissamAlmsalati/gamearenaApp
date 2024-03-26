@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 final ThemeData MyTheme = ThemeData(
-  primaryColor: Vx.yellow100,
   hintColor: Colors.black,
-  backgroundColor: Colors.grey[200],
   scaffoldBackgroundColor: Colors.white,
   fontFamily: GoogleFonts.rubik().fontFamily,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.transparent,
+    elevation: 0,
+    iconTheme: IconThemeData(color: Colors.black),
+  ),
   textTheme: const TextTheme(
     headline1: TextStyle(
       fontSize: 36,
